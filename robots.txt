@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://akbasozden.github.io/sitemap.xml
