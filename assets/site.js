@@ -1,7 +1,8 @@
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const h1 = document.getElementById('name');
-  h1.innerHTML = h1.textContent.toLocaleUpperCase('tr').split(' ').map(w =>
+  // Yayındaki sitede kutular HTML'de hazır gelir; yoksa burada oluştur
+  if (!h1.querySelector('.tile')) h1.innerHTML = h1.textContent.toLocaleUpperCase('tr').split(' ').map(w =>
     `<span class="word" aria-hidden="true">${[...w].map(c => `<span class="tile" data-c="${c}">${c}</span>`).join('')}</span>`).join('');
   // Tabela animasyonu sadece ana sayfada ve yalnızca ilk ziyarette
   const onHome = document.getElementById('home') && !location.hash.slice(1);
