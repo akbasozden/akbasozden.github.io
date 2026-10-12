@@ -3,9 +3,12 @@
   const h1 = document.getElementById('name');
   h1.innerHTML = h1.textContent.toLocaleUpperCase('tr').split(' ').map(w =>
     `<span class="word" aria-hidden="true">${[...w].map(c => `<span class="tile" data-c="${c}">${c}</span>`).join('')}</span>`).join('');
-  // Tabela animasyonu sadece ana sayfada
+  // Tabela animasyonu sadece ana sayfada ve oturum başına bir kez
   const onHome = document.getElementById('home') && !location.hash.slice(1);
-  if (!reduce && onHome) {
+  let seen = false;
+  try { seen = sessionStorage.getItem('flapSeen') === '1'; } catch (e) {}
+  if (!reduce && onHome && !seen) {
+    try { sessionStorage.setItem('flapSeen', '1'); } catch (e) {}
     const pool = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ0123456789';
     h1.querySelectorAll('.tile').forEach((el, i) => {
       let n = 6 + i * 2;
