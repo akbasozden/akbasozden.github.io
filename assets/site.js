@@ -3,7 +3,9 @@
   const h1 = document.getElementById('name');
   h1.innerHTML = h1.textContent.toLocaleUpperCase('tr').split(' ').map(w =>
     `<span class="word" aria-hidden="true">${[...w].map(c => `<span class="tile" data-c="${c}">${c}</span>`).join('')}</span>`).join('');
-  if (!reduce) {
+  // Tabela animasyonu sadece ana sayfada
+  const onHome = document.getElementById('home') && !location.hash.slice(1);
+  if (!reduce && onHome) {
     const pool = 'ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ0123456789';
     h1.querySelectorAll('.tile').forEach((el, i) => {
       let n = 6 + i * 2;
@@ -12,6 +14,7 @@
         el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
         el.textContent = --n <= 0 ? el.dataset.c : pool[Math.floor(Math.random() * pool.length)];
         if (n > 0) setTimeout(tick, 55);
+        else setTimeout(() => el.classList.remove('flip'), 120);
       };
       setTimeout(tick, 150);
     });
