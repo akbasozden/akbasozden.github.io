@@ -14,9 +14,11 @@
     h1.querySelectorAll('.tile').forEach((el, i) => {
       let n = 6 + i * 2;
       el.textContent = pool[(i * 7) % pool.length];
+      el.classList.add('spin');
       const tick = () => {
         el.classList.remove('flip'); void el.offsetWidth; el.classList.add('flip');
         el.textContent = --n <= 0 ? el.dataset.c : pool[Math.floor(Math.random() * pool.length)];
+        if (n <= 0) el.classList.remove('spin');
         if (n > 0) setTimeout(tick, 55);
         else setTimeout(() => el.classList.remove('flip'), 120);
       };

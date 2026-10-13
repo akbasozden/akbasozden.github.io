@@ -99,6 +99,12 @@ a { color: inherit; text-decoration: none; }
 }
 .tile::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: var(--board); }
 .tile.flip { animation: flip .1s linear; }
+/* Harf kutuda ortalı dursun: düz harfler biraz yukarıda kalıyor; noktalı/şapkalı ve çengelli harfler yarı yarıya düzeltilir ki gövdeleri komşularıyla hizalı kalsın */
+.tile { padding-top: .056em; }
+.tile:not(.spin):is([data-c="Ö"], [data-c="Ü"], [data-c="Ğ"]) { padding-top: .17em; }
+.tile:not(.spin)[data-c="İ"] { padding-top: .19em; }
+.tile:not(.spin):is([data-c="Ş"], [data-c="Ç"]) { padding-top: 0; padding-bottom: .07em; }
+.tile:not(.spin)[data-c="J"] { padding-top: 0; padding-bottom: .06em; }
 @keyframes flip { 50% { transform: scaleY(.1); } }
 .role { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
 .role .tag { font: 800 20px/1 var(--display); letter-spacing: .04em; color: #FFFFFF; text-transform: uppercase; }
